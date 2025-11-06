@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    /* Custom animations for the landing page */
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-slide-up {
+        animation: slideUp 0.6s ease-out forwards;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Custom gradient text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent;
+    }
+
+    /* Glass morphism effect */
+    .glass {
+        @apply bg-white/10 backdrop-blur-lg border border-white/20;
+    }
+}

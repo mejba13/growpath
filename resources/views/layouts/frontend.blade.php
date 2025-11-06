@@ -40,54 +40,62 @@
 </head>
 <body class="font-sans antialiased bg-white">
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white border-b border-neutral-200" x-data="{ mobileMenuOpen: false }">
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200/50 shadow-sm" x-data="{ mobileMenuOpen: false }">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="text-2xl font-bold text-primary-brand">
-                        GrowPath
+                    <a href="{{ route('home') }}" class="flex items-center group">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold text-primary-brand">GrowPath</span>
                     </a>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-neutral-700 hover:text-primary-accent transition-colors {{ request()->routeIs('home') ? 'text-primary-accent font-semibold' : '' }}">
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="{{ route('home') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent transition-all duration-300 rounded-lg {{ request()->routeIs('home') ? 'text-primary-accent font-semibold bg-primary-accent/5' : 'hover:bg-neutral-50' }}">
                         Home
                     </a>
-                    <a href="{{ route('features') }}" class="text-neutral-700 hover:text-primary-accent transition-colors {{ request()->routeIs('features') ? 'text-primary-accent font-semibold' : '' }}">
+                    <a href="{{ route('features') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent transition-all duration-300 rounded-lg {{ request()->routeIs('features') ? 'text-primary-accent font-semibold bg-primary-accent/5' : 'hover:bg-neutral-50' }}">
                         Features
                     </a>
-                    <a href="{{ route('pricing') }}" class="text-neutral-700 hover:text-primary-accent transition-colors {{ request()->routeIs('pricing') ? 'text-primary-accent font-semibold' : '' }}">
+                    <a href="{{ route('pricing') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent transition-all duration-300 rounded-lg {{ request()->routeIs('pricing') ? 'text-primary-accent font-semibold bg-primary-accent/5' : 'hover:bg-neutral-50' }}">
                         Pricing
                     </a>
-                    <a href="{{ route('about') }}" class="text-neutral-700 hover:text-primary-accent transition-colors {{ request()->routeIs('about') ? 'text-primary-accent font-semibold' : '' }}">
+                    <a href="{{ route('about') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent transition-all duration-300 rounded-lg {{ request()->routeIs('about') ? 'text-primary-accent font-semibold bg-primary-accent/5' : 'hover:bg-neutral-50' }}">
                         About
                     </a>
-                    <a href="{{ route('contact') }}" class="text-neutral-700 hover:text-primary-accent transition-colors {{ request()->routeIs('contact') ? 'text-primary-accent font-semibold' : '' }}">
+                    <a href="{{ route('contact') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent transition-all duration-300 rounded-lg {{ request()->routeIs('contact') ? 'text-primary-accent font-semibold bg-primary-accent/5' : 'hover:bg-neutral-50' }}">
                         Contact
                     </a>
                 </div>
 
                 <!-- CTA Buttons -->
-                <div class="hidden md:flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-3">
                     @auth
-                        <a href="{{ route('dashboard') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">
+                        <a href="{{ route('dashboard') }}" class="px-5 py-2.5 text-neutral-700 hover:text-primary-accent transition-all duration-300 font-medium rounded-lg hover:bg-neutral-50">
                             Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">
+                        <a href="{{ route('login') }}" class="px-5 py-2.5 text-neutral-700 hover:text-primary-accent transition-all duration-300 font-medium rounded-lg hover:bg-neutral-50">
                             Sign In
                         </a>
-                        <a href="{{ route('register') }}" class="px-6 py-2 bg-primary-accent text-white rounded-md hover:bg-blue-700 transition-colors">
+                        <a href="{{ route('register') }}" class="group px-6 py-2.5 bg-primary-accent text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 flex items-center">
                             Get Started Free
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
                         </a>
                     @endauth
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-neutral-700 hover:text-primary-accent">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -97,18 +105,26 @@
             </div>
 
             <!-- Mobile Navigation -->
-            <div x-show="mobileMenuOpen" x-cloak class="md:hidden py-4 border-t border-neutral-200">
-                <div class="flex flex-col space-y-4">
-                    <a href="{{ route('home') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Home</a>
-                    <a href="{{ route('features') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Features</a>
-                    <a href="{{ route('pricing') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Pricing</a>
-                    <a href="{{ route('about') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">About</a>
-                    <a href="{{ route('contact') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Contact</a>
+            <div x-show="mobileMenuOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 -translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-2"
+                 x-cloak
+                 class="md:hidden py-4 border-t border-neutral-200">
+                <div class="flex flex-col space-y-2">
+                    <a href="{{ route('home') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Home</a>
+                    <a href="{{ route('features') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Features</a>
+                    <a href="{{ route('pricing') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Pricing</a>
+                    <a href="{{ route('about') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">About</a>
+                    <a href="{{ route('contact') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Contact</a>
                     @auth
-                        <a href="{{ route('dashboard') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-neutral-700 hover:text-primary-accent transition-colors">Sign In</a>
-                        <a href="{{ route('register') }}" class="px-6 py-2 bg-primary-accent text-white rounded-md hover:bg-blue-700 transition-colors text-center">
+                        <a href="{{ route('login') }}" class="px-4 py-2 text-neutral-700 hover:text-primary-accent hover:bg-neutral-50 rounded-lg transition-all duration-300">Sign In</a>
+                        <a href="{{ route('register') }}" class="px-4 py-3 bg-primary-accent text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-center font-semibold mt-2">
                             Get Started Free
                         </a>
                     @endauth

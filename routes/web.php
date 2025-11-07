@@ -114,6 +114,35 @@ Route::middleware(['auth', 'approved'])->group(function () {
     // Company Management (Multi-tenancy)
     Route::resource('companies', \App\Http\Controllers\CompanyController::class);
     Route::post('companies/{company}/switch', [\App\Http\Controllers\CompanyController::class, 'switch'])->name('companies.switch');
+
+    // Subscription Management
+    Route::prefix('subscriptions')->name('subscriptions.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\SubscriptionController::class, 'index'])->name('index');
+        Route::post('{subscription}/cancel', [\App\Http\Controllers\SubscriptionController::class, 'cancel'])->name('cancel');
+        Route::post('{subscription}/resume', [\App\Http\Controllers\SubscriptionController::class, 'resume'])->name('resume');
+        Route::get('{subscription}/invoices', [\App\Http\Controllers\SubscriptionController::class, 'invoices'])->name('invoices');
+        Route::get('invoices/{invoiceId}/download', [\App\Http\Controllers\SubscriptionController::class, 'downloadInvoice'])->name('invoices.download');
+    });
+
+    // Admin - Order Management
+    Route::prefix('admin')->name('admin.')->middleware('role:owner|admin')->group(function () {
+        Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+        Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+        Route::patch('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('orders.update');
+        Route::get('orders/export/csv', [\App\Http\Controllers\Admin\OrderController::class, 'export'])->name('orders.export');
+    });
 });
+
+// Checkout Routes (authenticated)
+Route::middleware(['auth', 'approved'])->prefix('checkout')->name('checkout.')->group(function () {
+    Route::get('pricing', [\App\Http\Controllers\CheckoutController::class, 'pricing'])->name('pricing');
+    Route::get('plan/{plan}', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('show');
+    Route::post('plan/{plan}/process', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('process');
+    Route::get('success/{order}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+    Route::get('failure', [\App\Http\Controllers\CheckoutController::class, 'failure'])->name('failure');
+});
+
+// Stripe Webhook (public, CSRF exempt)
+Route::post('webhooks/stripe', [\App\Http\Controllers\WebhookController::class, 'handle'])->name('webhooks.stripe');
 
 require __DIR__.'/auth.php';

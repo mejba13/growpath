@@ -21,17 +21,44 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@growpath.com',
             'password' => Hash::make('password'),
+            'role' => 'admin',
+            'is_approved' => true,
+            'approved_at' => now(),
         ]);
 
         $admin->assignRole('owner');
 
-        // Create a test user with member role
+        // Create a manager user
+        $manager = User::factory()->create([
+            'name' => 'Manager User',
+            'email' => 'manager@growpath.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'is_approved' => true,
+            'approved_at' => now(),
+        ]);
+
+        $manager->assignRole('manager');
+
+        // Create an approved test user with member role
         $testUser = User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'test@growpath.com',
             'password' => Hash::make('password'),
+            'role' => 'user',
+            'is_approved' => true,
+            'approved_at' => now(),
         ]);
 
         $testUser->assignRole('member');
+
+        // Create a pending user (not approved) for testing approval flow
+        User::factory()->create([
+            'name' => 'Pending User',
+            'email' => 'pending@growpath.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'is_approved' => false,
+        ]);
     }
 }

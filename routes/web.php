@@ -108,6 +108,8 @@ Route::middleware(['auth', 'approved'])->group(function () {
 
     // Blog Management
     Route::resource('blog-posts', \App\Http\Controllers\BlogPostController::class);
+    Route::resource('blog-categories', \App\Http\Controllers\BlogCategoryController::class)->except(['create', 'show', 'edit']);
+    Route::resource('blog-tags', \App\Http\Controllers\BlogTagController::class)->except(['create', 'show', 'edit']);
 });
 
 require __DIR__.'/auth.php';

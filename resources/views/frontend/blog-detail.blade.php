@@ -5,26 +5,30 @@
 @section('keywords', $post->tags->pluck('name')->implode(', '))
 
 @section('content')
-<article class="py-12 bg-white">
+<article class="py-16 lg:py-24 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
-        <nav class="mb-6 text-sm">
-            <a href="{{ route('home') }}" class="text-primary-accent hover:underline">Home</a>
-            <span class="text-neutral-400 mx-2">›</span>
-            <a href="{{ route('blog') }}" class="text-primary-accent hover:underline">Blog</a>
-            <span class="text-neutral-400 mx-2">›</span>
-            <span class="text-neutral-600">{{ Str::limit($post->title, 50) }}</span>
+        <nav class="mb-8 flex items-center text-sm">
+            <a href="{{ route('home') }}" class="text-neutral-600 hover:text-primary-accent transition-colors">Home</a>
+            <svg class="w-4 h-4 mx-2 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <a href="{{ route('blog') }}" class="text-neutral-600 hover:text-primary-accent transition-colors">Blog</a>
+            <svg class="w-4 h-4 mx-2 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span class="text-neutral-500">{{ Str::limit($post->title, 50) }}</span>
         </nav>
 
         <!-- Category & Meta -->
-        <div class="mb-6">
+        <div class="mb-10">
             @if($post->category)
-                <span class="inline-block px-3 py-1 text-xs font-semibold bg-primary-accent text-white rounded-full mb-4">
+                <span class="inline-flex items-center px-4 py-2 text-xs font-bold bg-gradient-to-r from-primary-accent/10 to-blue-50 text-primary-accent rounded-full mb-6 border border-primary-accent/20">
                     {{ $post->category->name }}
                 </span>
             @endif
 
-            <h1 class="text-4xl md:text-5xl font-bold text-primary-brand mb-4">{{ $post->title }}</h1>
+            <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-primary-brand mb-6 leading-tight">{{ $post->title }}</h1>
 
             <div class="flex items-center gap-4 text-sm text-neutral-600">
                 <div class="flex items-center gap-2">
@@ -173,22 +177,6 @@
     </section>
 @endif
 
-<!-- Newsletter CTA -->
-<section class="py-20 bg-primary-accent text-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold mb-6">Subscribe to Our Newsletter</h2>
-        <p class="text-xl text-blue-100 mb-8">
-            Get CRM tips, best practices, and product updates delivered to your inbox.
-        </p>
-        <form class="max-w-md mx-auto flex gap-4">
-            <input type="email" placeholder="Your email address"
-                   class="flex-1 px-6 py-3 rounded-md text-neutral-900 focus:ring-3 focus:ring-white">
-            <button type="submit" class="px-8 py-3 bg-white text-primary-accent rounded-md hover:bg-gray-100 transition-colors font-semibold">
-                Subscribe
-            </button>
-        </form>
-    </div>
-</section>
 @endsection
 
 @push('styles')

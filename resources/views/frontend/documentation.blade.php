@@ -5,12 +5,25 @@
 @section('keywords', 'documentation, user guide, API docs, CRM guide, tutorials, developer documentation')
 
 @section('content')
-<!-- Hero -->
-<section class="bg-primary-brand text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-5xl font-bold mb-6">Documentation</h1>
-        <p class="text-xl text-blue-100 max-w-3xl">
-            Everything you need to know about using GrowPath CRM effectively.
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-primary-brand py-24 lg:py-32">
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary-accent rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary-accent rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8 animate-fade-in">
+            <span class="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">COMPREHENSIVE GUIDE</span>
+        </div>
+
+        <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
+            GrowPath <span class="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">Documentation</span>
+        </h1>
+        <p class="text-xl lg:text-2xl text-blue-100 max-w-3xl leading-relaxed animate-slide-up">
+            Everything you need to know about using GrowPath CRM effectively and getting the most out of every feature.
         </p>
     </div>
 </section>

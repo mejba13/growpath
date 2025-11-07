@@ -5,13 +5,21 @@
 @section('keywords', 'privacy policy, data protection, GDPR, data security, privacy')
 
 @section('content')
-<!-- Hero -->
-<section class="bg-primary-brand text-white py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-5xl font-bold mb-6">Privacy Policy</h1>
-        <p class="text-xl text-blue-100">
-            Last updated: {{ date('F d, Y') }}
-        </p>
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-20 lg:py-28">
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-success rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary-accent rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+        </div>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">Privacy Policy</h1>
+        <p class="text-lg text-blue-100">Last updated: {{ date('F d, Y') }}</p>
     </div>
 </section>
 

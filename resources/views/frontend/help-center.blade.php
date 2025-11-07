@@ -5,25 +5,39 @@
 @section('keywords', 'help center, support, tutorials, FAQ, guides, customer support, CRM help')
 
 @section('content')
-<!-- Hero -->
-<section class="bg-primary-brand text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold mb-6">Help Center</h1>
-        <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-blue-50 py-24 lg:py-32">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDMiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 backdrop-blur-sm border border-primary-accent/20 rounded-full px-4 py-2 mb-8 animate-fade-in">
+            <span class="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">SUPPORT & RESOURCES</span>
+        </div>
+
+        <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-brand mb-6 leading-tight animate-slide-up">
+            How Can We <span class="gradient-text">Help You?</span>
+        </h1>
+        <p class="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up">
             Find answers, learn best practices, and get the support you need to succeed with GrowPath.
         </p>
 
         <!-- Search Bar -->
         <div class="max-w-2xl mx-auto">
-            <div class="relative">
+            <div class="relative group">
                 <input type="text" placeholder="Search for help articles..."
-                       class="w-full px-6 py-4 rounded-lg text-neutral-900 placeholder-neutral-500 focus:ring-3 focus:ring-primary-accent">
-                <button class="absolute right-2 top-2 px-6 py-2 bg-primary-accent text-white rounded-md hover:bg-blue-700">
+                       class="w-full px-6 py-5 pr-36 rounded-2xl text-neutral-900 placeholder-neutral-500 border-2 border-neutral-200 focus:border-primary-accent focus:ring-4 focus:ring-primary-accent/20 transition-all duration-300 shadow-lg">
+                <button class="absolute right-2 top-2 px-8 py-3 bg-gradient-to-r from-primary-accent to-blue-600 text-white rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 font-semibold">
                     Search
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary-accent/10 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute bottom-20 right-10 w-72 h-72 bg-secondary-accent/10 rounded-full blur-3xl -z-10"></div>
 </section>
 
 <!-- Popular Topics -->

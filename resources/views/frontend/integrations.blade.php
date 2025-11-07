@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Integrations - Connect Your Favorite Tools | GrowPath')
-@section('description', 'Connect GrowPath CRM with your favorite business tools. Seamless integrations with popular platforms.')
+@section('title', 'Integrations - Connect Your Favorite Tools | GrowPath AI')
+@section('description', 'Connect GrowPath AI CRM with your favorite business tools. Seamless integrations with popular platforms.')
 @section('keywords', 'integrations, third-party apps, CRM integrations, email integration, calendar sync')
 
 @section('content')
@@ -20,7 +20,7 @@
             Connect with Your <span class="bg-gradient-to-r from-secondary-accent to-purple-600 bg-clip-text text-transparent">Favorite Tools</span>
         </h1>
         <p class="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-slide-up">
-            Streamline your workflow by integrating GrowPath CRM with the tools you already use every day.
+            Streamline your workflow by integrating GrowPath AI CRM with the tools you already use every day.
         </p>
     </div>
 
@@ -35,7 +35,7 @@
         <div class="text-center mb-16">
             <h2 class="text-4xl lg:text-5xl font-bold text-primary-brand mb-6">Popular Integrations</h2>
             <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
-                Connect GrowPath with leading platforms to enhance your productivity
+                Connect GrowPath AI with leading platforms to enhance your productivity
             </p>
         </div>
 

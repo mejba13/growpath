@@ -1,6 +1,6 @@
 <x-layouts.auth>
     <div class="flex flex-col gap-7">
-        <x-auth-header :title="__('Join GrowPath')" :description="__('Create your account and start your growth journey')" />
+        <x-auth-header :title="__('Join GrowPath AI')" :description="__('Create your account and start your growth journey')" />
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />

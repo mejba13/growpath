@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Pricing Plans - Affordable CRM for Every Business Size | GrowPath')
-@section('description', 'Choose the perfect GrowPath CRM plan for your business. Transparent pricing with no hidden fees. Start with a 14-day free trial.')
+@section('title', 'Pricing Plans - Affordable CRM for Every Business Size | GrowPath AI')
+@section('description', 'Choose the perfect GrowPath AI CRM plan for your business. Transparent pricing with no hidden fees. Start with a 14-day free trial.')
 @section('keywords', 'CRM pricing, affordable CRM, business plans, small business CRM, enterprise CRM, free trial')
 
 @section('content')

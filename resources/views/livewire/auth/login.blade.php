@@ -65,7 +65,7 @@
                     <div class="w-full border-t border-neutral-200"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                    <span class="px-4 bg-white/80 text-neutral-600">{{ __('New to GrowPath?') }}</span>
+                    <span class="px-4 bg-white/80 text-neutral-600">{{ __('New to GrowPath AI?') }}</span>
                 </div>
             </div>
 

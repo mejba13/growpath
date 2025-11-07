@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Privacy Policy - How We Protect Your Data | GrowPath')
-@section('description', 'GrowPath privacy policy. Learn how we collect, use, and protect your personal information and data.')
+@section('title', 'Privacy Policy - How We Protect Your Data | GrowPath AI')
+@section('description', 'GrowPath AI privacy policy. Learn how we collect, use, and protect your personal information and data.')
 @section('keywords', 'privacy policy, data protection, GDPR, data security, privacy')
 
 @section('content')
@@ -30,7 +30,7 @@
             <div class="bg-blue-50 border-l-4 border-primary-accent p-6 mb-8">
                 <p class="text-sm font-semibold text-primary-brand mb-2">Our Commitment to Privacy</p>
                 <p class="text-sm text-neutral-700">
-                    At GrowPath, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our CRM platform.
+                    At GrowPath AI, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our CRM platform.
                 </p>
             </div>
 

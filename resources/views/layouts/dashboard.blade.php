@@ -20,7 +20,7 @@
                                 <x-app-logo-icon class="size-6 text-white" />
                             </div>
                             <span class="text-xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
-                                GrowPath
+                                GrowPath AI
                             </span>
                         </a>
                         <button @click="sidebarOpen = false" class="lg:hidden text-neutral-500 hover:text-neutral-700">

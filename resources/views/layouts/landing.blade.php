@@ -6,20 +6,20 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title', config('app.name') . ' - Client Hunting SaaS')</title>
-        <meta name="description" content="@yield('description', 'Discover, organize, and convert high-value clients with GrowPath.')">
+        <meta name="description" content="@yield('description', 'Discover, organize, and convert high-value clients with GrowPath AI.')">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:title" content="@yield('og_title', config('app.name'))">
-        <meta property="og:description" content="@yield('og_description', 'Discover, organize, and convert high-value clients with GrowPath.')">
+        <meta property="og:description" content="@yield('og_description', 'Discover, organize, and convert high-value clients with GrowPath AI.')">
         <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content="{{ url()->current() }}">
         <meta property="twitter:title" content="@yield('twitter_title', config('app.name'))">
-        <meta property="twitter:description" content="@yield('twitter_description', 'Discover, organize, and convert high-value clients with GrowPath.')">
+        <meta property="twitter:description" content="@yield('twitter_description', 'Discover, organize, and convert high-value clients with GrowPath AI.')">
         <meta property="twitter:image" content="@yield('twitter_image', asset('images/og-default.jpg'))">
 
         <!-- Canonical URL -->
@@ -42,7 +42,7 @@
                     <!-- Logo -->
                     <div class="flex-shrink-0">
                         <a href="{{ route('home') }}" class="flex items-center">
-                            <span class="text-2xl font-bold text-primary-brand">GrowPath</span>
+                            <span class="text-2xl font-bold text-primary-brand">GrowPath AI</span>
                         </a>
                     </div>
 
@@ -106,7 +106,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Brand -->
                     <div class="col-span-1">
-                        <h3 class="text-2xl font-bold mb-4">GrowPath</h3>
+                        <h3 class="text-2xl font-bold mb-4">GrowPath AI</h3>
                         <p class="text-neutral-300">Empowering businesses to systematically identify, track, and convert high-value prospects.</p>
                     </div>
 
@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-300">
-                    <p>&copy; {{ date('Y') }} GrowPath. All rights reserved.</p>
+                    <p>&copy; {{ date('Y') }} GrowPath AI. All rights reserved.</p>
                 </div>
             </div>
         </footer>

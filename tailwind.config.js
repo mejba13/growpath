@@ -11,7 +11,7 @@ export default {
 
     theme: {
         extend: {
-            // GrowPath Design System
+            // GrowPath AI Design System
             colors: {
                 // Primary Colors
                 'primary-brand': '#0F172A',

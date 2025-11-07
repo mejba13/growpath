@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Blog - CRM Tips & Industry Insights | GrowPath')
-@section('description', 'Read the GrowPath blog for CRM tips, sales strategies, and industry insights to grow your business.')
+@section('title', 'Blog - CRM Tips & Industry Insights | GrowPath AI')
+@section('description', 'Read the GrowPath AI blog for CRM tips, sales strategies, and industry insights to grow your business.')
 @section('keywords', 'CRM blog, sales tips, business growth, CRM best practices, sales strategies')
 
 @section('content')
@@ -17,7 +17,7 @@
         </div>
 
         <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-brand mb-6 leading-tight animate-slide-up">
-            GrowPath <span class="gradient-text">Blog</span>
+            GrowPath AI <span class="gradient-text">Blog</span>
         </h1>
         <p class="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-slide-up">
             Tips, strategies, and insights to help you get the most out of your CRM and grow your business.

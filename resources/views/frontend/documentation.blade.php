@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Documentation - Complete Guide to GrowPath CRM | GrowPath')
-@section('description', 'Complete documentation for GrowPath CRM. Learn how to use all features, API integration, and best practices.')
+@section('title', 'Documentation - Complete Guide to GrowPath AI CRM | GrowPath AI')
+@section('description', 'Complete documentation for GrowPath AI CRM. Learn how to use all features, API integration, and best practices.')
 @section('keywords', 'documentation, user guide, API docs, CRM guide, tutorials, developer documentation')
 
 @section('content')
@@ -20,10 +20,10 @@
         </div>
 
         <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
-            GrowPath <span class="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">Documentation</span>
+            GrowPath AI <span class="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">Documentation</span>
         </h1>
         <p class="text-xl lg:text-2xl text-blue-100 max-w-3xl leading-relaxed animate-slide-up">
-            Everything you need to know about using GrowPath CRM effectively and getting the most out of every feature.
+            Everything you need to know about using GrowPath AI CRM effectively and getting the most out of every feature.
         </p>
     </div>
 </section>
@@ -82,10 +82,10 @@
                     <div id="introduction" class="mb-12">
                         <h2 class="text-3xl font-bold text-primary-brand mb-4">Introduction</h2>
                         <p class="text-neutral-700 mb-4">
-                            GrowPath is a modern CRM platform designed to help businesses manage their sales pipeline, track prospects, and grow revenue. This documentation will guide you through all features and functionalities.
+                            GrowPath AI is a modern CRM platform designed to help businesses manage their sales pipeline, track prospects, and grow revenue. This documentation will guide you through all features and functionalities.
                         </p>
                         <div class="bg-blue-50 border-l-4 border-primary-accent p-4 mb-4">
-                            <p class="text-sm"><strong>Note:</strong> This documentation is for GrowPath version 1.0. Features may vary based on your subscription plan.</p>
+                            <p class="text-sm"><strong>Note:</strong> This documentation is for GrowPath AI version 1.0. Features may vary based on your subscription plan.</p>
                         </div>
                     </div>
 
@@ -206,7 +206,7 @@
                         <h2 class="text-3xl font-bold text-primary-brand mb-4">Team Management</h2>
 
                         <h3 class="text-xl font-semibold text-primary-brand mb-3">Roles & Permissions</h3>
-                        <p class="text-neutral-700 mb-4">GrowPath uses role-based access control:</p>
+                        <p class="text-neutral-700 mb-4">GrowPath AI uses role-based access control:</p>
 
                         <div class="bg-neutral-50 rounded-lg p-4 mb-4">
                             <h4 class="font-semibold text-primary-brand mb-2">Owner</h4>
@@ -233,7 +233,7 @@
                     <div id="api" class="mb-12">
                         <h2 class="text-3xl font-bold text-primary-brand mb-4">API Integration</h2>
                         <p class="text-neutral-700 mb-4">
-                            GrowPath provides a RESTful API for integrating with your existing tools and workflows.
+                            GrowPath AI provides a RESTful API for integrating with your existing tools and workflows.
                         </p>
 
                         <h3 class="text-xl font-semibold text-primary-brand mb-3">Authentication</h3>

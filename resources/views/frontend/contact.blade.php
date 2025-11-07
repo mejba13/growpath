@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
-@section('title', 'Contact Us - Get in Touch with GrowPath Support Team')
-@section('description', 'Have questions about GrowPath CRM? Contact our team for support, sales inquiries, or general questions. We are here to help!')
-@section('keywords', 'contact GrowPath, customer support, sales inquiry, help center, get in touch')
+@section('title', 'Contact Us - Get in Touch with GrowPath AI Support Team')
+@section('description', 'Have questions about GrowPath AI CRM? Contact our team for support, sales inquiries, or general questions. We are here to help!')
+@section('keywords', 'contact GrowPath AI, customer support, sales inquiry, help center, get in touch')
 
 @section('content')
 <!-- Hero Section -->
@@ -20,7 +20,7 @@
             Let's Start a <span class="gradient-text">Conversation</span>
         </h1>
         <p class="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-slide-up">
-            Have questions about GrowPath? We're here to help. Reach out to our team for support, sales inquiries, or just to say hello.
+            Have questions about GrowPath AI? We're here to help. Reach out to our team for support, sales inquiries, or just to say hello.
         </p>
     </div>
 

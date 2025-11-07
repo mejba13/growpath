@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'API Documentation - Integrate with GrowPath | GrowPath')
-@section('description', 'Integrate GrowPath CRM with your applications using our RESTful API. Complete API documentation for developers.')
+@section('title', 'API Documentation - Integrate with GrowPath AI | GrowPath AI')
+@section('description', 'Integrate GrowPath AI CRM with your applications using our RESTful API. Complete API documentation for developers.')
 @section('keywords', 'API, REST API, API documentation, integration, developer API, webhooks')
 
 @section('content')
@@ -20,10 +20,10 @@
         </div>
 
         <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
-            GrowPath <span class="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">API</span>
+            GrowPath AI <span class="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">API</span>
         </h1>
         <p class="text-xl lg:text-2xl text-blue-100 max-w-3xl leading-relaxed animate-slide-up">
-            Powerful RESTful API to integrate GrowPath with your existing tools and workflows. Build custom integrations and automate your CRM.
+            Powerful RESTful API to integrate GrowPath AI with your existing tools and workflows. Build custom integrations and automate your CRM.
         </p>
     </div>
 </section>
@@ -84,7 +84,7 @@
                         <h2 class="text-3xl lg:text-4xl font-bold text-primary-brand">Getting Started</h2>
                     </div>
                     <p class="text-lg text-neutral-700 mb-6 leading-relaxed">
-                        The GrowPath API is a RESTful API that allows you to programmatically interact with your CRM data. All API requests should be made to:
+                        The GrowPath AI API is a RESTful API that allows you to programmatically interact with your CRM data. All API requests should be made to:
                     </p>
                     <div class="bg-neutral-900 text-white rounded-xl p-6 mb-6 border border-neutral-700">
                         <div class="flex items-center justify-between mb-3">

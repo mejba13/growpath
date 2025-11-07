@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Terms of Service - Legal Agreement | GrowPath')
-@section('description', 'GrowPath Terms of Service. Read our terms and conditions for using our CRM platform.')
+@section('title', 'Terms of Service - Legal Agreement | GrowPath AI')
+@section('description', 'GrowPath AI Terms of Service. Read our terms and conditions for using our CRM platform.')
 @section('keywords', 'terms of service, terms and conditions, legal agreement, user agreement')
 
 @section('content')
@@ -29,22 +29,22 @@
             <div class="bg-blue-50 border-l-4 border-primary-accent p-6 mb-8">
                 <p class="text-sm font-semibold text-primary-brand mb-2">Agreement to Terms</p>
                 <p class="text-sm text-neutral-700">
-                    By accessing or using GrowPath, you agree to be bound by these Terms of Service. Please read them carefully.
+                    By accessing or using GrowPath AI, you agree to be bound by these Terms of Service. Please read them carefully.
                 </p>
             </div>
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">1. Acceptance of Terms</h2>
             <p class="text-neutral-700 mb-6">
-                By creating an account and using GrowPath, you agree to comply with and be bound by these Terms of Service, our Privacy Policy, and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
+                By creating an account and using GrowPath AI, you agree to comply with and be bound by these Terms of Service, our Privacy Policy, and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
             </p>
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">2. Description of Service</h2>
             <p class="text-neutral-700 mb-6">
-                GrowPath provides a cloud-based Customer Relationship Management (CRM) platform that enables users to manage prospects, track sales pipelines, and grow their business. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time.
+                GrowPath AI provides a cloud-based Customer Relationship Management (CRM) platform that enables users to manage prospects, track sales pipelines, and grow their business. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time.
             </p>
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">3. Account Registration</h2>
-            <p class="text-neutral-700 mb-4">To use GrowPath, you must:</p>
+            <p class="text-neutral-700 mb-4">To use GrowPath AI, you must:</p>
             <ul class="list-disc list-inside text-neutral-700 mb-6">
                 <li>Provide accurate and complete registration information</li>
                 <li>Maintain the security of your account credentials</li>
@@ -91,7 +91,7 @@
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">7. Intellectual Property</h2>
             <p class="text-neutral-700 mb-6">
-                All content, features, and functionality of GrowPath are owned by us and protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative works without our written permission.
+                All content, features, and functionality of GrowPath AI are owned by us and protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative works without our written permission.
             </p>
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">8. Service Level and Uptime</h2>
@@ -122,7 +122,7 @@
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">12. Indemnification</h2>
             <p class="text-neutral-700 mb-6">
-                You agree to indemnify and hold harmless GrowPath from any claims, damages, or expenses arising from your use of the service or violation of these terms.
+                You agree to indemnify and hold harmless GrowPath AI from any claims, damages, or expenses arising from your use of the service or violation of these terms.
             </p>
 
             <h2 class="text-3xl font-bold text-primary-brand mt-8 mb-4">13. Governing Law</h2>

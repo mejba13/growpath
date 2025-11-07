@@ -3,7 +3,7 @@
     <head>
         @include('partials.head')
 
-        <title>{{ config('app.name', 'GrowPath') }}</title>
+        <title>{{ config('app.name', 'GrowPath AI') }}</title>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

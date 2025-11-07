@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Help Center - Get Support & Find Answers | GrowPath')
-@section('description', 'Find answers to common questions, video tutorials, and guides to help you get the most out of GrowPath CRM.')
+@section('title', 'Help Center - Get Support & Find Answers | GrowPath AI')
+@section('description', 'Find answers to common questions, video tutorials, and guides to help you get the most out of GrowPath AI CRM.')
 @section('keywords', 'help center, support, tutorials, FAQ, guides, customer support, CRM help')
 
 @section('content')
@@ -20,7 +20,7 @@
             How Can We <span class="gradient-text">Help You?</span>
         </h1>
         <p class="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up">
-            Find answers, learn best practices, and get the support you need to succeed with GrowPath.
+            Find answers, learn best practices, and get the support you need to succeed with GrowPath AI.
         </p>
 
         <!-- Search Bar -->
@@ -114,8 +114,8 @@
                     </svg>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-semibold text-lg text-primary-brand mb-2">GrowPath Overview (5 min)</h3>
-                    <p class="text-neutral-600 text-sm">Learn the basics of GrowPath CRM in just 5 minutes.</p>
+                    <h3 class="font-semibold text-lg text-primary-brand mb-2">GrowPath AI Overview (5 min)</h3>
+                    <p class="text-neutral-600 text-sm">Learn the basics of GrowPath AI CRM in just 5 minutes.</p>
                 </div>
             </div>
 
@@ -166,12 +166,12 @@
 
             <div class="bg-neutral-50 rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-primary-brand mb-2">How do I set up team permissions?</h3>
-                <p class="text-neutral-600">GrowPath uses role-based permissions. Go to Team → Roles to assign users as Owner, Admin, Manager, or Member, each with different access levels.</p>
+                <p class="text-neutral-600">GrowPath AI uses role-based permissions. Go to Team → Roles to assign users as Owner, Admin, Manager, or Member, each with different access levels.</p>
             </div>
 
             <div class="bg-neutral-50 rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-primary-brand mb-2">What browsers are supported?</h3>
-                <p class="text-neutral-600">GrowPath works on all modern browsers including Chrome, Firefox, Safari, and Edge. We recommend using the latest version for the best experience.</p>
+                <p class="text-neutral-600">GrowPath AI works on all modern browsers including Chrome, Firefox, Safari, and Edge. We recommend using the latest version for the best experience.</p>
             </div>
 
             <div class="bg-neutral-50 rounded-lg p-6">
@@ -187,7 +187,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl font-bold mb-6">Still Need Help?</h2>
         <p class="text-xl text-blue-100 mb-8">
-            Our support team is here to help you succeed with GrowPath.
+            Our support team is here to help you succeed with GrowPath AI.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('contact') }}" class="px-8 py-4 bg-white text-primary-accent rounded-lg font-semibold hover:bg-gray-100 transition-colors">

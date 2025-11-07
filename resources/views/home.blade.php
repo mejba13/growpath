@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
-@section('title', 'GrowPath - Client Hunting SaaS Platform')
-@section('description', 'Discover, organize, and convert high-value clients with GrowPath. Systematic client hunting made simple.')
+@section('title', 'GrowPath AI - Client Hunting SaaS Platform')
+@section('description', 'Discover, organize, and convert high-value clients with GrowPath AI. Systematic client hunting made simple.')
 
 @section('content')
 <div x-data="landing()">
@@ -219,7 +219,7 @@
                 Ready to Transform Your Client Hunting?
             </h2>
             <p class="text-xl text-neutral-200 mb-8">
-                Join hundreds of businesses growing with GrowPath
+                Join hundreds of businesses growing with GrowPath AI
             </p>
             <x-ui.button variant="primary" size="lg" href="{{ route('register') }}">
                 Start Your Free Trial

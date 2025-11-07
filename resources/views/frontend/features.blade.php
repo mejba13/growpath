@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'CRM Features - Prospect, Pipeline & Client Management | GrowPath')
+@section('title', 'CRM Features - Prospect, Pipeline & Client Management | GrowPath AI')
 @section('description', 'Discover powerful CRM features including prospect management, sales pipeline tracking, follow-up automation, analytics, and team collaboration tools.')
 @section('keywords', 'CRM features, prospect management, sales pipeline, task automation, client tracking, analytics, reporting, team collaboration')
 

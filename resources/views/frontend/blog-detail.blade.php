@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', $post->title . ' | GrowPath Blog')
+@section('title', $post->title . ' | GrowPath AI Blog')
 @section('description', $post->excerpt ?? Str::limit(strip_tags($post->content), 160))
 @section('keywords', $post->tags->pluck('name')->implode(', '))
 

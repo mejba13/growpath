@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
-@section('title', 'Careers - Join Our Team | GrowPath')
-@section('description', 'Join the GrowPath team! Explore career opportunities and help us build the future of CRM.')
-@section('keywords', 'careers, jobs, employment, work at GrowPath, job openings')
+@section('title', 'Careers - Join Our Team | GrowPath AI')
+@section('description', 'Join the GrowPath AI team! Explore career opportunities and help us build the future of CRM.')
+@section('keywords', 'careers, jobs, employment, work at GrowPath AI, job openings')
 
 @section('content')
 <!-- Hero Section -->
@@ -33,7 +33,7 @@
 <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-4xl lg:text-5xl font-bold text-primary-brand mb-6">Why Join GrowPath?</h2>
+            <h2 class="text-4xl lg:text-5xl font-bold text-primary-brand mb-6">Why Join GrowPath AI?</h2>
             <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
                 We're a fast-growing SaaS company dedicated to helping businesses succeed. Join us and make an impact!
             </p>
@@ -192,7 +192,7 @@
                     </div>
                 </div>
                 <p class="text-neutral-700 leading-relaxed mb-6">
-                    Help our customers achieve success with GrowPath. You'll onboard new users, provide training, and ensure customer satisfaction throughout their journey.
+                    Help our customers achieve success with GrowPath AI. You'll onboard new users, provide training, and ensure customer satisfaction throughout their journey.
                 </p>
                 <a href="{{ route('contact') }}" class="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-success to-emerald-600 text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
                     <span>Apply Now</span>

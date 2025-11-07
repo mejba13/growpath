@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'GrowPath - Modern CRM Software for Growing Businesses | Sales & Client Management')
-@section('description', 'GrowPath is a powerful, easy-to-use CRM platform that helps businesses manage prospects, track sales pipelines, and grow revenue. Start your free trial today!')
+@section('title', 'GrowPath AI - Modern CRM Software for Growing Businesses | Sales & Client Management')
+@section('description', 'GrowPath AI is a powerful, easy-to-use CRM platform that helps businesses manage prospects, track sales pipelines, and grow revenue. Start your free trial today!')
 @section('keywords', 'CRM software, customer relationship management, sales pipeline management, prospect tracking, client management, business growth tools, sales automation')
 
 @push('structured-data')
@@ -9,7 +9,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "SoftwareApplication",
-  "name": "GrowPath",
+  "name": "GrowPath AI",
   "applicationCategory": "BusinessApplication",
   "offers": {
     "@@type": "Offer",
@@ -403,7 +403,7 @@ function heroCarousel() {
                 <span class="text-primary-accent">Growing Businesses</span>
             </h2>
             <p class="text-xl text-neutral-600">
-                See what our customers have to say about their experience with GrowPath
+                See what our customers have to say about their experience with GrowPath AI
             </p>
         </div>
 
@@ -431,7 +431,7 @@ function heroCarousel() {
 
                 <!-- Testimonial Text -->
                 <p class="text-neutral-700 text-lg leading-relaxed mb-8">
-                    "GrowPath transformed how we manage our sales pipeline. We've increased our conversion rate by 35% in just 3 months!"
+                    "GrowPath AI transformed how we manage our sales pipeline. We've increased our conversion rate by 35% in just 3 months!"
                 </p>
 
                 <!-- Author -->
@@ -505,7 +505,7 @@ function heroCarousel() {
 
                 <!-- Testimonial Text -->
                 <p class="text-neutral-700 text-lg leading-relaxed mb-8">
-                    "Easy to use, powerful features, and excellent support. GrowPath is everything we needed in a CRM."
+                    "Easy to use, powerful features, and excellent support. GrowPath AI is everything we needed in a CRM."
                 </p>
 
                 <!-- Author -->
@@ -554,7 +554,7 @@ function heroCarousel() {
 
         <!-- Description -->
         <p class="text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Join thousands of businesses using GrowPath to manage their sales pipeline, close more deals, and accelerate revenue growth.
+            Join thousands of businesses using GrowPath AI to manage their sales pipeline, close more deals, and accelerate revenue growth.
         </p>
 
         <!-- CTA Buttons -->

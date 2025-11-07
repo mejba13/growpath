@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
-@section('title', 'About GrowPath - Building Better CRM for Growing Businesses')
-@section('description', 'Learn about GrowPath mission to help businesses grow through better customer relationship management. Meet our team and discover our story.')
-@section('keywords', 'about GrowPath, CRM company, business growth, customer success, company mission, team')
+@section('title', 'About GrowPath AI - Building Better CRM for Growing Businesses')
+@section('description', 'Learn about GrowPath AI mission to help businesses grow through better customer relationship management. Meet our team and discover our story.')
+@section('keywords', 'about GrowPath AI, CRM company, business growth, customer success, company mission, team')
 
 @section('content')
 <!-- Hero -->
@@ -46,13 +46,13 @@
                 </h2>
                 <div class="space-y-6 text-lg text-neutral-600 leading-relaxed">
                     <p>
-                        GrowPath was founded in 2024 with a simple belief: <strong class="text-primary-brand">managing customer relationships shouldn't be complicated</strong>. We saw too many businesses struggling with overly complex CRM systems that required extensive training and failed to deliver real value.
+                        GrowPath AI was founded in 2024 with a simple belief: <strong class="text-primary-brand">managing customer relationships shouldn't be complicated</strong>. We saw too many businesses struggling with overly complex CRM systems that required extensive training and failed to deliver real value.
                     </p>
                     <p>
                         Our founders, experienced sales professionals and software engineers, came together to create a CRM that actually helps businesses grow. We focused on three core principles: <strong class="text-primary-brand">simplicity, power, and affordability</strong>.
                     </p>
                     <p>
-                        Today, GrowPath serves thousands of businesses worldwide, helping them manage prospects, track sales pipelines, and close more deals. We're proud to be the CRM of choice for growing businesses.
+                        Today, GrowPath AI serves thousands of businesses worldwide, helping them manage prospects, track sales pipelines, and close more deals. We're proud to be the CRM of choice for growing businesses.
                     </p>
                 </div>
             </div>
@@ -267,7 +267,7 @@
 
         <!-- Description -->
         <p class="text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Start managing your prospects better today with GrowPath and accelerate your business growth.
+            Start managing your prospects better today with GrowPath AI and accelerate your business growth.
         </p>
 
         <!-- CTA Buttons -->

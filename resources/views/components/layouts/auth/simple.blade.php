@@ -18,8 +18,8 @@
                     <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-blue-600 rounded-2xl shadow-xl group-hover:scale-110 transition-transform duration-300">
                         <x-app-logo-icon class="size-9 text-white" />
                     </div>
-                    <span class="text-3xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath</span>
-                    <span class="sr-only">{{ config('app.name', 'GrowPath') }}</span>
+                    <span class="text-3xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath AI</span>
+                    <span class="sr-only">{{ config('app.name', 'GrowPath AI') }}</span>
                 </a>
 
                 <!-- Auth Card -->

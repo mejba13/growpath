@@ -4,15 +4,15 @@
     @include('partials.head')
 
     <!-- SEO Meta Tags -->
-    <title>@yield('title', 'GrowPath - Modern CRM Solution for Growing Businesses')</title>
-    <meta name="description" content="@yield('description', 'GrowPath is a powerful CRM platform designed to help businesses manage prospects, track clients, and grow revenue. Start your free trial today.')">
+    <title>@yield('title', 'GrowPath AI - Modern CRM Solution for Growing Businesses')</title>
+    <meta name="description" content="@yield('description', 'GrowPath AI is a powerful CRM platform designed to help businesses manage prospects, track clients, and grow revenue. Start your free trial today.')">
     <meta name="keywords" content="@yield('keywords', 'CRM software, customer relationship management, sales pipeline, prospect management, client tracking, business growth')">
-    <meta name="author" content="GrowPath">
+    <meta name="author" content="GrowPath AI">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="@yield('og_title', 'GrowPath - Modern CRM Solution')">
+    <meta property="og:title" content="@yield('og_title', 'GrowPath AI - Modern CRM Solution')">
     <meta property="og:description" content="@yield('og_description', 'Powerful CRM platform for growing businesses')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -20,7 +20,7 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('twitter_title', 'GrowPath - Modern CRM Solution')">
+    <meta name="twitter:title" content="@yield('twitter_title', 'GrowPath AI - Modern CRM Solution')">
     <meta name="twitter:description" content="@yield('twitter_description', 'Powerful CRM platform for growing businesses')">
     <meta name="twitter:image" content="{{ asset('images/twitter-image.jpg') }}">
 
@@ -40,7 +40,7 @@
                         <div class="w-10 h-10 bg-gradient-to-br from-primary-accent to-blue-600 rounded-xl flex items-center justify-center mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
                             <x-app-logo-icon class="size-6 text-white" />
                         </div>
-                        <span class="text-2xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath</span>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath AI</span>
                     </a>
                 </div>
 
@@ -148,7 +148,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                                 </svg>
                             </div>
-                            <h3 class="text-2xl font-bold">GrowPath</h3>
+                            <h3 class="text-2xl font-bold">GrowPath AI</h3>
                         </div>
 
                         <p class="text-neutral-300 leading-relaxed mb-6 max-w-sm">
@@ -304,7 +304,7 @@
             <div class="border-t border-white/10 py-8">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <p class="text-neutral-400 text-sm text-center md:text-left">
-                        &copy; {{ date('Y') }} GrowPath. All rights reserved. Built with excellence for growing businesses.
+                        &copy; {{ date('Y') }} GrowPath AI. All rights reserved. Built with excellence for growing businesses.
                     </p>
                     <div class="flex items-center gap-6 text-sm">
                         <a href="{{ route('privacy-policy') }}" class="text-neutral-400 hover:text-white transition-colors">Privacy</a>

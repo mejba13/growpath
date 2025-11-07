@@ -35,6 +35,15 @@ class TeamController extends Controller
             $query->role($request->role);
         }
 
+        // Filter by approval status
+        if ($request->filled('status')) {
+            if ($request->status === 'pending') {
+                $query->where('is_approved', false);
+            } elseif ($request->status === 'approved') {
+                $query->where('is_approved', true);
+            }
+        }
+
         $users = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
         $roles = Role::all();
 
@@ -178,5 +187,54 @@ class TeamController extends Controller
         ]);
 
         return back()->with('success', 'Password updated successfully.');
+    }
+
+    /**
+     * Approve a pending user.
+     */
+    public function approve(User $user)
+    {
+        // Only admins can approve users
+        if (!auth()->user()->isAdmin()) {
+            abort(403);
+        }
+
+        if ($user->is_approved) {
+            return back()->with('error', 'User is already approved.');
+        }
+
+        $user->update([
+            'is_approved' => true,
+            'approved_at' => now(),
+            'approved_by' => auth()->id(),
+        ]);
+
+        // TODO: Send approval email notification to the user
+
+        return back()->with('success', "User {$user->name} has been approved successfully.");
+    }
+
+    /**
+     * Reject and delete a pending user.
+     */
+    public function reject(User $user)
+    {
+        // Only admins can reject users
+        if (!auth()->user()->isAdmin()) {
+            abort(403);
+        }
+
+        if ($user->is_approved) {
+            return back()->with('error', 'Cannot reject an approved user. Please deactivate them instead.');
+        }
+
+        $userName = $user->name;
+        $user->delete();
+
+        // TODO: Send rejection email notification to the user
+
+        return redirect()
+            ->route('team.index')
+            ->with('success', "Registration request from {$userName} has been rejected.");
     }
 }

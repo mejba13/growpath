@@ -1,57 +1,82 @@
 <x-layouts.auth>
-    <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
+    <div class="flex flex-col gap-7">
+        <x-auth-header :title="__('Welcome back')" :description="__('Enter your credentials to access your account')" />
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
 
-        <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
+        <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6 animate-fade-in">
             @csrf
 
             <!-- Email Address -->
-            <flux:input
-                name="email"
-                :label="__('Email address')"
-                type="email"
-                required
-                autofocus
-                autocomplete="email"
-                placeholder="email@example.com"
-            />
+            <div class="space-y-2">
+                <flux:input
+                    name="email"
+                    :label="__('Email address')"
+                    type="email"
+                    required
+                    autofocus
+                    autocomplete="email"
+                    placeholder="email@example.com"
+                    class="transition-all duration-300 hover:shadow-md focus-within:shadow-lg"
+                />
+            </div>
 
             <!-- Password -->
-            <div class="relative">
+            <div class="relative space-y-2">
                 <flux:input
                     name="password"
                     :label="__('Password')"
                     type="password"
                     required
                     autocomplete="current-password"
-                    :placeholder="__('Password')"
+                    :placeholder="__('Enter your password')"
                     viewable
+                    class="transition-all duration-300 hover:shadow-md focus-within:shadow-lg"
                 />
 
                 @if (Route::has('password.request'))
-                    <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
-                        {{ __('Forgot your password?') }}
+                    <flux:link class="absolute top-0 text-sm end-0 hover:text-primary-accent transition-colors duration-200" :href="route('password.request')" wire:navigate>
+                        {{ __('Forgot password?') }}
                     </flux:link>
                 @endif
             </div>
 
             <!-- Remember Me -->
-            <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
+            <div class="flex items-center">
+                <flux:checkbox name="remember" :label="__('Keep me signed in')" :checked="old('remember')" class="transition-all duration-200" />
+            </div>
 
-            <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
-                    {{ __('Log in') }}
+            <div class="flex items-center justify-end pt-2">
+                <flux:button
+                    variant="primary"
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-primary-accent to-blue-600 hover:from-primary-accent/90 hover:to-blue-600/90 transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
+                    data-test="login-button"
+                >
+                    {{ __('Sign in') }}
                 </flux:button>
             </div>
         </form>
 
         @if (Route::has('register'))
-            <div class="space-x-1 text-sm text-center rtl:space-x-reverse text-zinc-600 dark:text-zinc-400">
-                <span>{{ __('Don\'t have an account?') }}</span>
-                <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-neutral-200"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-4 bg-white/80 text-neutral-600">{{ __('New to GrowPath?') }}</span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <flux:link
+                    :href="route('register')"
+                    wire:navigate
+                    class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-primary-accent border-2 border-primary-accent/20 rounded-xl hover:border-primary-accent hover:bg-primary-accent/5 transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                    {{ __('Create an account') }}
+                </flux:link>
             </div>
         @endif
     </div>

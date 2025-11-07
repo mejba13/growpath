@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.head')
 
     <!-- SEO Meta Tags -->
     <title>@yield('title', 'GrowPath - Modern CRM Solution for Growing Businesses')</title>
@@ -26,13 +24,6 @@
     <meta name="twitter:description" content="@yield('twitter_description', 'Powerful CRM platform for growing businesses')">
     <meta name="twitter:image" content="{{ asset('images/twitter-image.jpg') }}">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     <!-- Structured Data -->
     @stack('structured-data')
 
@@ -46,12 +37,10 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="{{ route('home') }}" class="flex items-center group">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                            </svg>
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-accent to-blue-600 rounded-xl flex items-center justify-center mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <x-app-logo-icon class="size-6 text-white" />
                         </div>
-                        <span class="text-2xl font-bold text-primary-brand">GrowPath</span>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath</span>
                     </a>
                 </div>
 

@@ -23,7 +23,7 @@
     <!-- Search and Filters -->
     <x-ui.card :padding="false">
         <form action="{{ route('team.index') }}" method="GET" class="p-6 space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <input
                         type="text"
@@ -43,6 +43,13 @@
                         @endforeach
                     </select>
                 </div>
+                <div>
+                    <select name="status" class="w-full px-4 py-3 border border-neutral-300 rounded-md focus:ring-3 focus:ring-primary-accent">
+                        <option value="">All Status</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending Approval</option>
+                        <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                    </select>
+                </div>
             </div>
 
             <div class="flex gap-2">
@@ -52,7 +59,7 @@
                     </svg>
                     Search
                 </x-ui.button>
-                @if(request()->hasAny(['search', 'role']))
+                @if(request()->hasAny(['search', 'role', 'status']))
                     <x-ui.button variant="secondary" href="{{ route('team.index') }}">
                         Clear Filters
                     </x-ui.button>
@@ -77,8 +84,8 @@
                     <h3 class="text-lg font-semibold text-primary-brand">{{ $user->name }}</h3>
                     <p class="text-sm text-neutral-500 mt-1">{{ $user->email }}</p>
 
-                    <!-- Role -->
-                    <div class="mt-3">
+                    <!-- Role & Status -->
+                    <div class="mt-3 flex items-center justify-center gap-2 flex-wrap">
                         @php
                             $roleColors = [
                                 'owner' => 'secondary-accent',
@@ -92,6 +99,12 @@
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-{{ $roleColor }} bg-opacity-10 text-{{ $roleColor }}">
                             {{ ucfirst($roleName) }}
                         </span>
+
+                        @if(!$user->is_approved)
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-warning bg-opacity-10 text-warning">
+                                Pending Approval
+                            </span>
+                        @endif
                     </div>
 
                     <!-- Stats -->
@@ -109,13 +122,35 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="mt-6 flex items-center justify-center gap-2">
-                        <a href="{{ route('team.show', $user) }}" class="flex-1 px-4 py-2 bg-primary-accent text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors text-center">
-                            View Details
-                        </a>
-                        <a href="{{ route('team.edit', $user) }}" class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md text-sm font-medium hover:bg-neutral-300 transition-colors">
-                            Edit
-                        </a>
+                    <div class="mt-6 space-y-2">
+                        @if(!$user->is_approved && auth()->user()->isAdmin())
+                            <!-- Approval Actions -->
+                            <div class="flex items-center justify-center gap-2">
+                                <form action="{{ route('team.approve', $user) }}" method="POST" class="flex-1">
+                                    @csrf
+                                    <button type="submit" class="w-full px-4 py-2 bg-success text-white rounded-md text-sm font-medium hover:bg-green-700 transition-colors">
+                                        Approve
+                                    </button>
+                                </form>
+                                <form action="{{ route('team.reject', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to reject this user?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-4 py-2 bg-error text-white rounded-md text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Reject
+                                    </button>
+                                </form>
+                            </div>
+                        @else
+                            <!-- Regular Actions -->
+                            <div class="flex items-center justify-center gap-2">
+                                <a href="{{ route('team.show', $user) }}" class="flex-1 px-4 py-2 bg-primary-accent text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors text-center">
+                                    View Details
+                                </a>
+                                <a href="{{ route('team.edit', $user) }}" class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md text-sm font-medium hover:bg-neutral-300 transition-colors">
+                                    Edit
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </x-ui.card>

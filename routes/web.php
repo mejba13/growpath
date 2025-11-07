@@ -59,9 +59,9 @@ Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show']
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'approved', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'approved'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
     // Team Management
     Route::resource('team', \App\Http\Controllers\TeamController::class)->parameters(['team' => 'user']);
     Route::patch('team/{user}/password', [\App\Http\Controllers\TeamController::class, 'updatePassword'])->name('team.update-password');
+    Route::post('team/{user}/approve', [\App\Http\Controllers\TeamController::class, 'approve'])->name('team.approve');
+    Route::delete('team/{user}/reject', [\App\Http\Controllers\TeamController::class, 'reject'])->name('team.reject');
 
     // Settings
     Route::get('settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');

@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @include('partials.head')
 
         <title>@yield('title', 'Dashboard') - {{ config('app.name') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @stack('styles')
     </head>
@@ -24,8 +15,13 @@
                 <div class="flex flex-col h-full">
                     <!-- Logo -->
                     <div class="flex items-center justify-between h-16 px-6 border-b border-neutral-200">
-                        <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-primary-brand">
-                            GrowPath
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                            <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-primary-accent to-blue-600 rounded-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
+                                <x-app-logo-icon class="size-6 text-white" />
+                            </div>
+                            <span class="text-xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
+                                GrowPath
+                            </span>
                         </a>
                         <button @click="sidebarOpen = false" class="lg:hidden text-neutral-500 hover:text-neutral-700">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

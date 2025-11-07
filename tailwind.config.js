@@ -80,6 +80,27 @@ export default {
                 'card': '0 1px 3px rgba(0, 0, 0, 0.1)',
                 'card-hover': '0 4px 6px rgba(0, 0, 0, 0.1)',
             },
+
+            animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'slide-up': 'slide-up 0.5s ease-out',
+                'fade-in': 'fade-in 0.4s ease-out',
+            },
+
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-20px)' },
+                },
+                'slide-up': {
+                    '0%': { transform: 'translateY(20px)', opacity: '0' },
+                    '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                'fade-in': {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+            },
         },
     },
 

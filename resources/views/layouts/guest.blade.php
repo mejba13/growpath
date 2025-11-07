@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    @include('partials.head')
+</head>
+<body class="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-blue-50 antialiased">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDMiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Decorative Elements -->
+    <div class="fixed top-20 left-10 w-72 h-72 bg-primary-accent/10 rounded-full blur-3xl pointer-events-none animate-float"></div>
+    <div class="fixed bottom-20 right-10 w-72 h-72 bg-secondary-accent/10 rounded-full blur-3xl pointer-events-none animate-float" style="animation-delay: 2s;"></div>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <div class="relative flex min-h-screen flex-col items-center justify-center gap-6 p-6 md:p-10">
+        <div class="flex w-full max-w-md flex-col gap-8 animate-slide-up">
+            <!-- Logo -->
+            <a href="{{ route('home') }}" class="flex flex-col items-center gap-3 font-medium group">
+                <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-blue-600 rounded-2xl shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <x-app-logo-icon class="size-9 text-white" />
+                </div>
+                <span class="text-3xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">GrowPath</span>
+                <span class="sr-only">{{ config('app.name', 'GrowPath') }}</span>
+            </a>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <!-- Auth Card -->
+            <div class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-white/50 p-8 md:p-10">
                 {{ $slot }}
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

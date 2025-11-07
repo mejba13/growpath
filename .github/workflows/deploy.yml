@@ -1,0 +1,157 @@
+name: 🚀 Deploy GrowPath to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allow manual deployment
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Run code formatting check
+        run: ./vendor/bin/pint --test
+
+      - name: Run tests
+        run: composer test
+
+  deploy:
+    name: Deploy to Production
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ secrets.HOSTINGER_SSH_PORT }} ${{ secrets.HOSTINGER_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".env" \
+            --exclude=".env.example" \
+            --exclude=".gitignore" \
+            --exclude=".gitattributes" \
+            --exclude="node_modules" \
+            --exclude="tests" \
+            --exclude="storage/framework/cache/**" \
+            --exclude="storage/framework/sessions/**" \
+            --exclude="storage/framework/views/**" \
+            --exclude="storage/logs/**" \
+            --exclude="system.ramlit.com/" \
+            --exclude="CLAUDE.md" \
+            --exclude="README.md" \
+            --exclude="phpunit.xml" \
+            --exclude="vite.config.js" \
+            --exclude="package.json" \
+            --exclude="package-lock.json" \
+            -e "ssh -p ${{ secrets.HOSTINGER_SSH_PORT }}" \
+            ./ ${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Laravel post-deploy commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            echo "🔄 Starting deployment process..."
+
+            # Step 1: Install dependencies
+            echo "📦 Installing Composer dependencies..."
+            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+            # Step 2: Clear all old caches (CRITICAL - prevents 500 errors)
+            echo "🧹 Clearing old caches..."
+            php artisan optimize:clear
+            php artisan responsecache:clear || true
+
+            # Step 3: Run migrations
+            echo "🗄️  Running database migrations..."
+            php artisan migrate --force
+
+            # Step 4: Publish Livewire assets
+            echo "🎨 Publishing Livewire/Volt assets..."
+            php artisan livewire:publish --assets || true
+
+            # Step 5: Rebuild framework caches
+            echo "🔨 Rebuilding framework caches..."
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan event:cache
+
+            # Step 6: Create storage symlink (shared hosting fix)
+            echo "🔗 Creating storage symlink..."
+            php artisan storage:link || true
+
+            # Step 7: Fix permissions
+            echo "🔒 Setting correct permissions..."
+            chmod -R 775 storage bootstrap/cache
+            find storage -type f -exec chmod 664 {} \;
+            find storage -type d -exec chmod 775 {} \;
+
+            # Step 8: Queue restart (if using queue workers)
+            echo "🔄 Restarting queue workers..."
+            php artisan queue:restart || true
+
+            echo "✅ Deployment completed successfully!"
+
+      - name: Deployment status notification
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Deployment to growpath.ramlit.com completed successfully"
+          else
+            echo "❌ Deployment to growpath.ramlit.com failed"
+            exit 1
+          fi

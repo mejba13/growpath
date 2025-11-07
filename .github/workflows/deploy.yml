@@ -71,9 +71,9 @@ jobs:
             php artisan optimize:clear
             php artisan responsecache:clear || true
 
-            # Step 4: Run migrations
+            # Step 4: Run migrations (without seeding)
             echo "🗄️  Running database migrations..."
-            php artisan migrate --force
+            php artisan migrate --force --no-interaction
 
             # Step 5: Publish Livewire assets
             echo "🎨 Publishing Livewire/Volt assets..."

@@ -13,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Only run seeders in local/testing environments, not in production
+        if (app()->environment('production')) {
+            $this->command->warn('Skipping seeders in production environment.');
+
+            // Only seed roles and permissions in production
+            $this->call(RoleAndPermissionSeeder::class);
+
+            return;
+        }
+
         // Seed roles and permissions first
         $this->call(RoleAndPermissionSeeder::class);
 

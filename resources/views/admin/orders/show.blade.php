@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Order Details - ' . $order->order_number)
+@section('page-title', 'Order Details - ' . $order->order_number)
 
 @section('content')
 <div class="min-h-screen bg-neutral-50 py-12">

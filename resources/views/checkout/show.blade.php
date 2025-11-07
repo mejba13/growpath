@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Checkout - ' . $plan->name . ' Plan')
+@section('page-title', 'Checkout - ' . $plan->name . ' Plan')
 
 @section('content')
 <div class="min-h-screen bg-neutral-50 py-12">
@@ -135,10 +135,36 @@
                     </div>
                     @endif
 
-                    <form id="payment-form" action="{{ route('checkout.process', $plan) }}" method="POST">
-                        @csrf
+                    <!-- Payment Method Selection -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-primary-brand mb-4">Select Payment Method</h3>
+                        <div class="grid grid-cols-2 gap-4" x-data="{ paymentMethod: 'stripe' }">
+                            <button type="button"
+                                    @click="paymentMethod = 'stripe'"
+                                    :class="paymentMethod === 'stripe' ? 'border-primary-accent bg-primary-accent/5' : 'border-neutral-300'"
+                                    class="flex items-center justify-center gap-3 px-6 py-4 border-2 rounded-xl transition-all hover:border-primary-accent">
+                                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="font-semibold">Credit Card</span>
+                            </button>
 
-                        <!-- Billing Details -->
+                            <button type="button"
+                                    @click="paymentMethod = 'paypal'"
+                                    :class="paymentMethod === 'paypal' ? 'border-primary-accent bg-primary-accent/5' : 'border-neutral-300'"
+                                    class="flex items-center justify-center gap-3 px-6 py-4 border-2 rounded-xl transition-all hover:border-primary-accent">
+                                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="#0070ba">
+                                    <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72c.1-.575.596-1.01 1.18-1.01h8.375c2.678 0 4.5 1.8 4.5 4.47 0 3.15-2.34 5.325-5.5 5.325h-2.6l-1.823 8.832zm9.124-13.47c1.8 0 3.1 1.35 3.1 3.15 0 2.15-1.6 3.65-3.8 3.65h-2.3l-1.2 5.75h-3.15l2.9-13.85h4.45z"/>
+                                </svg>
+                                <span class="font-semibold">PayPal</span>
+                            </button>
+
+                            <!-- Stripe Form -->
+                            <div x-show="paymentMethod === 'stripe'" class="col-span-2">
+                                <form id="payment-form" action="{{ route('checkout.process', $plan) }}" method="POST">
+                                    @csrf
+
+                                    <!-- Billing Details -->
                         <div class="mb-6">
                             <h3 class="text-lg font-semibold text-primary-brand mb-4">Billing Details</h3>
                             <div class="grid grid-cols-1 gap-4">
@@ -202,6 +228,25 @@
                             <a href="{{ route('terms') }}" class="text-primary-accent hover:underline" target="_blank">Terms of Service</a>
                         </p>
                     </form>
+                            </div>
+
+                            <!-- PayPal Form -->
+                            <div x-show="paymentMethod === 'paypal'" class="col-span-2">
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-primary-brand mb-4">Pay with PayPal</h3>
+                                    <p class="text-neutral-600 mb-4">You will be redirected to PayPal to complete your payment securely.</p>
+
+                                    <!-- PayPal Button Container -->
+                                    <div id="paypal-button-container"></div>
+                                </div>
+
+                                <p class="mt-4 text-center text-sm text-neutral-600">
+                                    By confirming your subscription, you agree to our
+                                    <a href="{{ route('terms') }}" class="text-primary-accent hover:underline" target="_blank">Terms of Service</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -210,6 +255,7 @@
 
 @push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=USD&disable-funding=credit,card"></script>
 <script>
     // Initialize Stripe
     const stripe = Stripe('{{ config('services.stripe.key') }}');
@@ -287,6 +333,38 @@
             form.submit();
         }
     });
+
+    // Initialize PayPal
+    if (window.paypal) {
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '{{ number_format($plan->price, 2, '.', '') }}'
+                        },
+                        description: '{{ $plan->name }} Plan - Monthly Subscription'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Send PayPal order ID to server
+                    window.location.href = '{{ route('checkout.process', $plan) }}?payment_method=paypal&order_id=' + data.orderID;
+                });
+            },
+            onError: function(err) {
+                console.error('PayPal error:', err);
+                alert('An error occurred with PayPal. Please try again or use a different payment method.');
+            },
+            style: {
+                shape: 'rect',
+                color: 'blue',
+                layout: 'vertical',
+                label: 'paypal'
+            }
+        }).render('#paypal-button-container');
+    }
 </script>
 @endpush
 @endsection

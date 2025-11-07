@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Choose Your Plan')
+@section('page-title', 'Choose Your Plan')
 
 @section('content')
 <div class="min-h-screen bg-neutral-50 py-12">

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'My Subscription')
+@section('page-title', 'My Subscription')
 
 @section('content')
 <div class="min-h-screen bg-neutral-50 py-12">

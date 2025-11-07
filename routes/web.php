@@ -3,7 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Frontend Pages
+/*
+|--------------------------------------------------------------------------
+| Frontend Routes (Public)
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
     return view('frontend.home');
 })->name('home');
@@ -54,68 +59,148 @@ Route::get('/careers', function () {
     return view('frontend.careers');
 })->name('careers');
 
+// Public Blog
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'approved', 'verified'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes (Authenticated)
+|--------------------------------------------------------------------------
+*/
 
-Route::middleware(['auth', 'approved'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::prefix('dashboard')->middleware(['auth', 'approved'])->group(function () {
 
-    // Prospect Management
+    // Dashboard Home
+    Route::get('/', function () {
+        return view('dashboard');
+    })->middleware('verified')->name('dashboard');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile Management
+    |--------------------------------------------------------------------------
+    */
+
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRM - Prospect Management
+    |--------------------------------------------------------------------------
+    */
+
+    Route::prefix('prospects')->name('prospects.')->group(function () {
+        Route::get('export/csv', [\App\Http\Controllers\ProspectController::class, 'export'])->name('export');
+        Route::post('bulk/delete', [\App\Http\Controllers\ProspectController::class, 'bulkDestroy'])->name('bulk.destroy');
+        Route::post('bulk/update-status', [\App\Http\Controllers\ProspectController::class, 'bulkUpdateStatus'])->name('bulk.update-status');
+        Route::post('bulk/assign', [\App\Http\Controllers\ProspectController::class, 'bulkAssign'])->name('bulk.assign');
+        Route::post('{prospect}/convert', [\App\Http\Controllers\ProspectController::class, 'convert'])->name('convert');
+    });
     Route::resource('prospects', \App\Http\Controllers\ProspectController::class);
-    Route::post('prospects/{prospect}/convert', [\App\Http\Controllers\ProspectController::class, 'convert'])->name('prospects.convert');
-    Route::get('prospects/export/csv', [\App\Http\Controllers\ProspectController::class, 'export'])->name('prospects.export');
-    Route::post('prospects/bulk/delete', [\App\Http\Controllers\ProspectController::class, 'bulkDestroy'])->name('prospects.bulk.destroy');
-    Route::post('prospects/bulk/update-status', [\App\Http\Controllers\ProspectController::class, 'bulkUpdateStatus'])->name('prospects.bulk.update-status');
-    Route::post('prospects/bulk/assign', [\App\Http\Controllers\ProspectController::class, 'bulkAssign'])->name('prospects.bulk.assign');
 
-    // Client Management
+    /*
+    |--------------------------------------------------------------------------
+    | CRM - Client Management
+    |--------------------------------------------------------------------------
+    */
+
     Route::get('clients/export/csv', [\App\Http\Controllers\ClientController::class, 'export'])->name('clients.export');
     Route::resource('clients', \App\Http\Controllers\ClientController::class);
 
-    // Follow-up Management
+    /*
+    |--------------------------------------------------------------------------
+    | CRM - Follow-up Management
+    |--------------------------------------------------------------------------
+    */
+
     Route::resource('follow-ups', \App\Http\Controllers\FollowUpController::class)->except(['show']);
     Route::post('follow-ups/{follow_up}/complete', [\App\Http\Controllers\FollowUpController::class, 'complete'])->name('follow-ups.complete');
 
-    // Pipeline
-    Route::get('pipeline', [\App\Http\Controllers\PipelineController::class, 'index'])->name('pipeline.index');
-    Route::post('pipeline/{prospect}/update-status', [\App\Http\Controllers\PipelineController::class, 'updateStatus'])->name('pipeline.update-status');
+    /*
+    |--------------------------------------------------------------------------
+    | CRM - Pipeline Management
+    |--------------------------------------------------------------------------
+    */
 
-    // Reports & Analytics
+    Route::prefix('pipeline')->name('pipeline.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\PipelineController::class, 'index'])->name('index');
+        Route::post('{prospect}/update-status', [\App\Http\Controllers\PipelineController::class, 'updateStatus'])->name('update-status');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reports & Analytics
+    |--------------------------------------------------------------------------
+    */
+
     Route::get('reports', [\App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
 
-    // Team Management
+    /*
+    |--------------------------------------------------------------------------
+    | Team Management
+    |--------------------------------------------------------------------------
+    */
+
     Route::resource('team', \App\Http\Controllers\TeamController::class)->parameters(['team' => 'user']);
     Route::patch('team/{user}/password', [\App\Http\Controllers\TeamController::class, 'updatePassword'])->name('team.update-password');
     Route::post('team/{user}/approve', [\App\Http\Controllers\TeamController::class, 'approve'])->name('team.approve');
     Route::delete('team/{user}/reject', [\App\Http\Controllers\TeamController::class, 'reject'])->name('team.reject');
 
-    // Settings
-    Route::get('settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');
-    Route::patch('settings', [\App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update');
+    /*
+    |--------------------------------------------------------------------------
+    | Settings
+    |--------------------------------------------------------------------------
+    */
 
-    // Contact Messages
-    Route::get('contact-messages', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact-messages.index');
-    Route::get('contact-messages/{contactMessage}', [\App\Http\Controllers\ContactController::class, 'show'])->name('contact-messages.show');
-    Route::patch('contact-messages/{contactMessage}', [\App\Http\Controllers\ContactController::class, 'update'])->name('contact-messages.update');
-    Route::patch('contact-messages/{contactMessage}/mark-replied', [\App\Http\Controllers\ContactController::class, 'markAsReplied'])->name('contact-messages.mark-replied');
-    Route::delete('contact-messages/{contactMessage}', [\App\Http\Controllers\ContactController::class, 'destroy'])->name('contact-messages.destroy');
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\SettingsController::class, 'index'])->name('index');
+        Route::patch('/', [\App\Http\Controllers\SettingsController::class, 'update'])->name('update');
+    });
 
-    // Blog Management
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Messages Management
+    |--------------------------------------------------------------------------
+    */
+
+    Route::prefix('contact-messages')->name('contact-messages.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ContactController::class, 'index'])->name('index');
+        Route::get('{contactMessage}', [\App\Http\Controllers\ContactController::class, 'show'])->name('show');
+        Route::patch('{contactMessage}', [\App\Http\Controllers\ContactController::class, 'update'])->name('update');
+        Route::patch('{contactMessage}/mark-replied', [\App\Http\Controllers\ContactController::class, 'markAsReplied'])->name('mark-replied');
+        Route::delete('{contactMessage}', [\App\Http\Controllers\ContactController::class, 'destroy'])->name('destroy');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Blog Management (Admin)
+    |--------------------------------------------------------------------------
+    */
+
     Route::resource('blog-posts', \App\Http\Controllers\BlogPostController::class);
     Route::resource('blog-categories', \App\Http\Controllers\BlogCategoryController::class)->except(['create', 'show', 'edit']);
     Route::resource('blog-tags', \App\Http\Controllers\BlogTagController::class)->except(['create', 'show', 'edit']);
 
-    // Company Management (Multi-tenancy)
+    /*
+    |--------------------------------------------------------------------------
+    | Company Management (Multi-tenancy)
+    |--------------------------------------------------------------------------
+    */
+
     Route::resource('companies', \App\Http\Controllers\CompanyController::class);
     Route::post('companies/{company}/switch', [\App\Http\Controllers\CompanyController::class, 'switch'])->name('companies.switch');
 
-    // Subscription Management
+    /*
+    |--------------------------------------------------------------------------
+    | Billing & Subscription Management
+    |--------------------------------------------------------------------------
+    */
+
     Route::prefix('subscriptions')->name('subscriptions.')->group(function () {
         Route::get('/', [\App\Http\Controllers\SubscriptionController::class, 'index'])->name('index');
         Route::post('{subscription}/cancel', [\App\Http\Controllers\SubscriptionController::class, 'cancel'])->name('cancel');
@@ -124,25 +209,50 @@ Route::middleware(['auth', 'approved'])->group(function () {
         Route::get('invoices/{invoiceId}/download', [\App\Http\Controllers\SubscriptionController::class, 'downloadInvoice'])->name('invoices.download');
     });
 
-    // Admin - Order Management
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout & Payment Processing
+    |--------------------------------------------------------------------------
+    */
+
+    Route::prefix('checkout')->name('checkout.')->group(function () {
+        Route::get('pricing', [\App\Http\Controllers\CheckoutController::class, 'pricing'])->name('pricing');
+        Route::get('plan/{plan}', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('show');
+        Route::post('plan/{plan}/process', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('process');
+        Route::get('success/{order}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+        Route::get('failure', [\App\Http\Controllers\CheckoutController::class, 'failure'])->name('failure');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Routes (Owner & Admin Only)
+    |--------------------------------------------------------------------------
+    */
+
     Route::prefix('admin')->name('admin.')->middleware('role:owner|admin')->group(function () {
-        Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
-        Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
-        Route::patch('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('orders.update');
-        Route::get('orders/export/csv', [\App\Http\Controllers\Admin\OrderController::class, 'export'])->name('orders.export');
+
+        // Order Management
+        Route::prefix('orders')->name('orders.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('index');
+            Route::get('export/csv', [\App\Http\Controllers\Admin\OrderController::class, 'export'])->name('export');
+            Route::get('{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('show');
+            Route::patch('{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('update');
+        });
     });
 });
 
-// Checkout Routes (authenticated)
-Route::middleware(['auth', 'approved'])->prefix('checkout')->name('checkout.')->group(function () {
-    Route::get('pricing', [\App\Http\Controllers\CheckoutController::class, 'pricing'])->name('pricing');
-    Route::get('plan/{plan}', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('show');
-    Route::post('plan/{plan}/process', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('process');
-    Route::get('success/{order}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
-    Route::get('failure', [\App\Http\Controllers\CheckoutController::class, 'failure'])->name('failure');
-});
+/*
+|--------------------------------------------------------------------------
+| Webhooks (Public, CSRF Exempt)
+|--------------------------------------------------------------------------
+*/
 
-// Stripe Webhook (public, CSRF exempt)
 Route::post('webhooks/stripe', [\App\Http\Controllers\WebhookController::class, 'handle'])->name('webhooks.stripe');
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 
 require __DIR__.'/auth.php';

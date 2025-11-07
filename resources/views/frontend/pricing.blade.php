@@ -63,12 +63,21 @@
                     <p class="text-sm text-neutral-500 mt-2">Billed monthly</p>
                 </div>
 
-                <a href="{{ route('register') }}" class="group/btn w-full px-6 py-4 bg-neutral-100 hover:bg-neutral-200 text-primary-brand rounded-xl font-semibold transition-all duration-300 text-center mb-8 inline-flex items-center justify-center">
+                @auth
+                <a href="{{ route('checkout.pricing') }}" class="group/btn w-full px-6 py-4 bg-neutral-100 hover:bg-neutral-200 text-primary-brand rounded-xl font-semibold transition-all duration-300 text-center mb-8 inline-flex items-center justify-center">
                     Start Free Trial
                     <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                 </a>
+                @else
+                <a href="{{ route('register') }}?redirect=checkout" class="group/btn w-full px-6 py-4 bg-neutral-100 hover:bg-neutral-200 text-primary-brand rounded-xl font-semibold transition-all duration-300 text-center mb-8 inline-flex items-center justify-center">
+                    Start Free Trial
+                    <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+                @endauth
 
                 <div class="space-y-4 flex-grow">
                     <div class="flex items-start gap-3">
@@ -128,12 +137,21 @@
                     <p class="text-sm text-blue-200 mt-2">Billed monthly</p>
                 </div>
 
-                <a href="{{ route('register') }}" class="group/btn w-full px-6 py-4 bg-white text-primary-accent rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl text-center mb-8 inline-flex items-center justify-center">
+                @auth
+                <a href="{{ route('checkout.pricing') }}" class="group/btn w-full px-6 py-4 bg-white text-primary-accent rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl text-center mb-8 inline-flex items-center justify-center">
                     Start Free Trial
                     <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                 </a>
+                @else
+                <a href="{{ route('register') }}?redirect=checkout" class="group/btn w-full px-6 py-4 bg-white text-primary-accent rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl text-center mb-8 inline-flex items-center justify-center">
+                    Start Free Trial
+                    <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+                @endauth
 
                 <div class="space-y-4 flex-grow">
                     <div class="flex items-start gap-3">

@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscription;
 use App\Services\StripeService;
+use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
     protected $stripeService;
+    protected $paypalService;
 
-    public function __construct(StripeService $stripeService)
+    public function __construct(StripeService $stripeService, PayPalService $paypalService)
     {
         $this->middleware('auth');
         $this->stripeService = $stripeService;
+        $this->paypalService = $paypalService;
     }
 
     /**
@@ -48,8 +51,12 @@ class SubscriptionController extends Controller
         try {
             DB::beginTransaction();
 
-            // Cancel on Stripe
-            $this->stripeService->cancelSubscription($subscription);
+            // Cancel on payment gateway
+            if ($subscription->stripe_subscription_id) {
+                $this->stripeService->cancelSubscription($subscription);
+            } else {
+                $this->paypalService->cancelSubscription($subscription);
+            }
 
             // Update local record
             $subscription->cancel();
@@ -81,8 +88,12 @@ class SubscriptionController extends Controller
         try {
             DB::beginTransaction();
 
-            // Resume on Stripe
-            $this->stripeService->resumeSubscription($subscription);
+            // Resume on payment gateway
+            if ($subscription->stripe_subscription_id) {
+                $this->stripeService->resumeSubscription($subscription);
+            } else {
+                $this->paypalService->resumeSubscription($subscription);
+            }
 
             // Update local record
             $subscription->resume();

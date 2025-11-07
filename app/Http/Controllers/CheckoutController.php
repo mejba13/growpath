@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\Order;
 use App\Models\Invoice;
 use App\Services\StripeService;
+use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Log;
 class CheckoutController extends Controller
 {
     protected $stripeService;
+    protected $paypalService;
 
-    public function __construct(StripeService $stripeService)
+    public function __construct(StripeService $stripeService, PayPalService $paypalService)
     {
         $this->middleware('auth');
         $this->stripeService = $stripeService;
+        $this->paypalService = $paypalService;
     }
 
     /**
@@ -54,6 +57,12 @@ class CheckoutController extends Controller
      */
     public function process(Request $request, Plan $plan)
     {
+        // Handle PayPal payment
+        if ($request->has('payment_method') && $request->payment_method === 'paypal') {
+            return $this->processPayPalPayment($request, $plan);
+        }
+
+        // Handle Stripe payment
         $request->validate([
             'payment_method_id' => 'required|string',
             'billing_name' => 'required|string|max:255',
@@ -137,6 +146,68 @@ class CheckoutController extends Controller
     }
 
     /**
+     * Process PayPal payment.
+     */
+    protected function processPayPalPayment(Request $request, Plan $plan)
+    {
+        $request->validate([
+            'order_id' => 'required|string',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $user = auth()->user();
+            $paypalOrderId = $request->order_id;
+
+            // Verify PayPal payment
+            if (!$this->paypalService->verifyPayment($paypalOrderId)) {
+                throw new \Exception('PayPal payment verification failed');
+            }
+
+            // Create local subscription record
+            $subscription = $this->paypalService->createLocalSubscription(
+                $paypalOrderId,
+                $plan,
+                $user
+            );
+
+            // Create order record
+            $order = $this->paypalService->createLocalOrder(
+                $paypalOrderId,
+                $plan,
+                $user,
+                $subscription
+            );
+
+            // Create payment record
+            $payment = $this->paypalService->createLocalPayment(
+                $paypalOrderId,
+                $order,
+                $subscription
+            );
+
+            // Create invoice
+            $invoice = $this->createInvoice($order, $plan, $request);
+
+            DB::commit();
+
+            // TODO: Send confirmation email
+            // Mail::to($user)->send(new SubscriptionConfirmation($order));
+
+            return redirect()->route('checkout.success', $order)
+                ->with('success', 'Payment successful! Your subscription is now active.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('PayPal checkout failed: ' . $e->getMessage());
+
+            return redirect()->route('checkout.failure')
+                ->with('error', 'Payment failed: ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Create an invoice for the order.
      */
     protected function createInvoice(Order $order, Plan $plan, Request $request): Invoice
@@ -156,8 +227,8 @@ class CheckoutController extends Controller
             'total' => $order->total,
             'currency' => $order->currency,
             'billing_details' => [
-                'name' => $request->billing_name,
-                'email' => $request->billing_email,
+                'name' => $request->input('billing_name', auth()->user()->name),
+                'email' => $request->input('billing_email', auth()->user()->email),
                 'company' => auth()->user()->currentCompany?->name,
             ],
             'line_items' => [

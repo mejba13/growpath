@@ -45,6 +45,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        // Handle redirect parameter for specific flows (e.g., checkout)
+        if ($request->query('redirect') === 'checkout') {
+            return redirect()->route('checkout.pricing');
+        }
+
         return redirect(route('dashboard', absolute: false));
     }
 }

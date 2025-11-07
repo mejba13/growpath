@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Invoices - ' . $subscription->plan->name . ' Subscription')
+@section('page-title', 'Invoices - ' . $subscription->plan->name . ' Subscription')
 
 @section('content')
 <div class="min-h-screen bg-neutral-50 py-12">
